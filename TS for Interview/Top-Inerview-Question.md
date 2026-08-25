@@ -1,19 +1,20 @@
-🚀 Top 70 TypeScript Interview Questions & Answers
-🟢 Part 1: TypeScript Fundamentals
+## 🚀 Top 70 TypeScript Interview Questions & Answers
 
-1. What is TypeScript?
+### 🟢 Part 1: TypeScript Fundamentals
+
+### 1. What is TypeScript?
 
 Answer:
 
 TypeScript is a programming language developed by Microsoft that is a superset of JavaScript. It adds a static type system and other developer features to JavaScript. TypeScript code is transpiled into JavaScript before execution.
 
-2. Why do we use TypeScript?
+### 2. Why do we use TypeScript?
 
 Answer:
 
 We use TypeScript to catch type-related errors during development, improve code readability, provide better IDE support, make refactoring safer, and improve maintainability in large applications.
 
-3. What is the difference between TypeScript and JavaScript?
+### 3. What is the difference between TypeScript and JavaScript?
 
 Answer:
 
@@ -23,7 +24,7 @@ The key point is:
 
 TypeScript improves development-time safety, while JavaScript is what normally executes at runtime.
 
-4. What does it mean that TypeScript is a superset of JavaScript?
+### 4. What does it mean that TypeScript is a superset of JavaScript?
 
 Answer:
 
@@ -38,7 +39,7 @@ Most TypeScript type information does not exist at runtime. Types, interfaces, a
 
 This is called type erasure.
 
-6. What is transpilation?
+### 6. What is transpilation?
 
 Answer:
 
@@ -46,19 +47,23 @@ Transpilation is the process of converting source code from one language or lang
 
 For TypeScript:
 
-TypeScript → JavaScript 7. What does tsc do?
+TypeScript → JavaScript
+
+### 7. What does tsc do?
 
 Answer:
 
 tsc is the TypeScript compiler. It performs type checking and can emit JavaScript based on TypeScript files and compiler configuration.
 
-8. Can TypeScript prevent all bugs?
+### 8. Can TypeScript prevent all bugs?
 
 Answer:
 
 No. TypeScript mainly prevents many type-related mistakes during development. It cannot automatically prevent logical errors, network failures, database failures, or invalid external data.
 
-🟢 Part 2: Type System Basics 9. What is type annotation?
+## 🟢 Part 2: Type System Basics
+
+### 9. What is type annotation?
 
 Answer:
 
@@ -68,7 +73,7 @@ const name: string = "Asif";
 
 Here, string is the type annotation.
 
-10. What is type inference?
+### 10. What is type inference?
 
 Answer:
 
@@ -78,7 +83,7 @@ const age = 25;
 
 TypeScript infers age as number.
 
-11. Type annotation vs type inference?
+### 11. Type annotation vs type inference?
 
 Answer:
 
@@ -95,19 +100,23 @@ let status = "success";
 
 The type is generally string, not "success".
 
-13. What is contextual typing?
+### 13. What is contextual typing?
 
 Answer:
 
 Contextual typing means TypeScript determines the type of an expression based on where or how it is used.
 
+```
 const numbers = [1, 2, 3];
 
 numbers.map((value) => value \* 2);
+```
 
 TypeScript knows value is a number from the array context.
 
-🟡 Part 3: Important Types 14. What is any?
+### 🟡 Part 3: Important Types
+
+### 14. What is any?
 
 Answer:
 
@@ -120,7 +129,7 @@ value();
 
 TypeScript allows these operations, which can lead to runtime errors.
 
-15. Why is any dangerous?
+### 15. Why is any dangerous?
 
 Answer:
 
@@ -128,7 +137,7 @@ Because it removes type safety and allows invalid operations to spread through t
 
 It should generally be avoided unless there is a specific reason.
 
-16. What is unknown?
+### 16. What is unknown?
 
 Answer:
 
@@ -138,7 +147,9 @@ let value: unknown = "Hello";
 
 if (typeof value === "string") {
 console.log(value.toUpperCase());
-} 17. any vs unknown?
+}
+
+### 17. any vs unknown?
 
 Answer:
 
@@ -148,7 +159,7 @@ unknown requires type narrowing before the value can be used safely.
 
 unknown is the safer alternative to any when the type is genuinely unknown.
 
-18. What is never?
+### 18. What is never?
 
 Answer:
 
@@ -161,7 +172,9 @@ Exhaustive checking
 Impossible states
 function fail(message: string): never {
 throw new Error(message);
-} 19. never vs void?
+}
+
+### 19. never vs void?
 
 Answer:
 
@@ -175,7 +188,9 @@ console.log("Hello");
 
 function fail(): never {
 throw new Error();
-} 20. null vs undefined?
+}
+
+### 20. null vs undefined?
 
 Answer:
 
@@ -183,29 +198,37 @@ undefined usually means a value was not assigned or is missing.
 
 null is typically an explicit value representing intentional absence.
 
-🟡 Part 4: Object Types 21. What is an interface?
+### 🟡 Part 4: Object Types
+
+### 21. What is an interface?
 
 Answer:
 
 An interface defines the structure or contract of an object.
 
+```
 interface User {
 id: string;
 name: string;
-} 22. What is a type alias?
+}
+```
+
+### 22. What is a type alias?
 
 Answer:
 
 A type alias gives a name to a type.
 
+```
 type User = {
 id: string;
 name: string;
 };
+```
 
 Unlike interfaces, type aliases can also represent unions, primitives, tuples, and other type expressions.
 
-23. type vs interface?
+### 23. type vs interface?
 
 Answer:
 
@@ -215,12 +238,13 @@ Use interface when defining object contracts that may be extended or declaration
 
 Use type when you need unions, intersections, mapped types, conditional types, or more complex type expressions.
 
-24. What is declaration merging?
+### 24. What is declaration merging?
 
 Answer:
 
 Declaration merging allows multiple declarations of the same interface name to combine into one interface.
 
+```
 interface User {
 name: string;
 }
@@ -228,19 +252,24 @@ name: string;
 interface User {
 age: number;
 }
+```
 
 The resulting interface contains both properties.
 
-25. What are optional properties?
+### 25. What are optional properties?
 
 Answer:
 
 Optional properties may or may not exist.
 
+```
 interface User {
 name: string;
 age?: number;
-} 26. What is readonly?
+}
+```
+
+### 26. What is readonly?
 
 Answer:
 
@@ -252,7 +281,7 @@ readonly id: string;
 
 It is primarily a compile-time restriction unless paired with runtime immutability.
 
-27. What is structural typing?
+### 27. What is structural typing?
 
 Answer:
 
