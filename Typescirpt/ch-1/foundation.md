@@ -249,3 +249,4 @@ if (typeof value === "string") {
 - Literal Type → নির্দিষ্ট Value-ই Type
 - Widening → Type বড় হয়
 - Narrowing → Type ছোট/নির্দিষ্ট হয়
+
