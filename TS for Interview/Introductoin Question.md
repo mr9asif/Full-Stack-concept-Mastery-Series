@@ -47,5 +47,3 @@ Generally, TypeScript types do not exist at runtime.
 Short answer
 
 TypeScript itself generally does not directly improve runtime performance because most TypeScript type information is removed during compilation.
-
-kjkjkjhjkh
