@@ -20,12 +20,14 @@ Footer
 
 React-এ এগুলোকে আলাদা আলাদা Component হিসেবে তৈরি করা যায়।
 
+```
 App
 ├── Navbar
 ├── Sidebar
 ├── Post
 │ └── Comment
 └── Footer
+```
 
 এতে code reusable, manageable এবং maintain করা সহজ হয়।
 
@@ -57,11 +59,13 @@ Component-based architecture means breaking the UI into small, independent, and 
 
 Example:
 
+```
 Website
 ├── Navbar Component
 ├── Sidebar Component
 ├── Product Component
 └── Footer Component
+```
 
 Benefit:
 
@@ -88,11 +92,13 @@ Declarative programming means we describe what the UI should look like, and Reac
 
 Example:
 
+```
 const [count, setCount] = useState(0);
 
 <button onClick={() => setCount(count + 1)}>
 {count}
 </button>
+```
 
 আমরা শুধু বলছি:
 
@@ -124,9 +130,11 @@ JSX = JavaScript XML
 
 JSX হলো এমন একটি syntax যা ব্যবহার করে আমরা JavaScript-এর ভিতরে HTML-এর মতো UI লিখতে পারি।
 
+```
 Example:
 
 const element = <h1>Hello React</h1>;
+```
 
 দেখতে HTML-এর মতো হলেও এটি HTML না। এটি JSX।
 
@@ -136,6 +144,7 @@ JSX কেন ব্যবহার করি?
 
 JSX ব্যবহার করলে UI code লেখা সহজ এবং readable হয়।
 
+```
 Without JSX:
 
 React.createElement("h1", null, "Hello");
@@ -143,6 +152,7 @@ React.createElement("h1", null, "Hello");
 With JSX:
 
 <h1>Hello</h1>
+```
 
 তাই JSX বেশি সহজ এবং readable।
 
@@ -181,6 +191,7 @@ HTML uses for, JSX uses htmlFor
 JSX attributes generally use camelCase
 JSX expressions use {}
 
+```
 Example:
 
 <label htmlFor="email">Email</label>
@@ -220,6 +231,7 @@ return (
 }
 
 <> </> হলো React Fragment।
+```
 
 সবচেয়ে গুরুত্বপূর্ণ মনে রাখো
 
@@ -287,6 +299,7 @@ Props হলো Parent Component থেকে Child Component-এ data পাঠ
 
 সহজভাবে:
 
+```
 Props = Parent → Child data
 
 function User({ name }) {
@@ -296,6 +309,7 @@ return <h1>{name}</h1>;
 function App() {
 return <User name="Reja" />;
 }
+```
 
 এখানে "Reja" হলো props হিসেবে User component-এ যাচ্ছে।
 
@@ -338,9 +352,12 @@ Footer
 
 একটি website = অনেকগুলো Component।
 
+```
 function Welcome() {
 return <h1>Hello</h1>;
 }
+```
+
 Important Interview Questions
 
 1. What is a Component in React?
@@ -423,11 +440,14 @@ Component → HOC → Enhanced Component
 
 Example:
 
+```
 const withAuth = (Component) => {
 return function EnhancedComponent(props) {
 return <Component {...props} />;
 };
 };
+```
+
 Important Interview Questions
 
 1. What is a Higher-Order Component (HOC)?
@@ -462,9 +482,12 @@ Render Props = Share logic using a function prop
 
 Example:
 
+```
 <DataProvider
 render={(data) => <UserList data={data} />}
 />
+```
+
 Important Interview Questions
 
 1. What is the Render Props pattern?
