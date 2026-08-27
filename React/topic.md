@@ -212,6 +212,7 @@ Yes, but they need to be wrapped inside a single parent element or a Fragment.
 function App() {
 return (
 <>
+
 <h1>Hello</h1>
 <p>Welcome</p>
 </>
@@ -223,3 +224,261 @@ return (
 সবচেয়ে গুরুত্বপূর্ণ মনে রাখো
 
 JSX is a syntax extension that allows us to write HTML-like code inside JavaScript. Browsers cannot understand JSX directly, so it is transformed into JavaScript before execution.
+
+3. Components
+   Component কী?
+
+Component হলো UI-এর একটি ছোট, reusable অংশ।
+
+যেমন:
+
+Navbar
+Button
+Card
+Footer
+
+একটি website = অনেকগুলো Component।
+
+function Welcome() {
+return <h1>Hello</h1>;
+}
+Important Interview Questions
+
+1. What is a Component in React?
+
+Answer:
+
+A component is a reusable and independent piece of UI.
+
+2. What are the types of Components?
+
+মূলত:
+
+Functional Component ✅
+Class Component (পুরোনো, এখন কম ব্যবহার হয়)
+
+আজকাল বেশি ব্যবহার হয় Functional Component + Hooks।
+
+3. What is the difference between Functional and Class Components?
+
+Answer:
+
+Functional components are simple JavaScript functions and use Hooks for state and other React features.
+
+Class components use JavaScript classes and lifecycle methods.
+
+👉 Modern React mainly uses Functional Components.
+
+4. Why do we use Components?
+
+Answer:
+
+Code reusable হয়
+Code maintain করা সহজ
+বড় UI ছোট ছোট অংশে ভাগ করা যায়
+মনে রাখো:
+
+Component = Reusable piece of U
+
+4. Props
+   Props কী?
+
+Props হলো Parent Component থেকে Child Component-এ data পাঠানোর উপায়।
+
+সহজভাবে:
+
+Props = Parent → Child data
+
+function User({ name }) {
+return <h1>{name}</h1>;
+}
+
+function App() {
+return <User name="Reja" />;
+}
+
+এখানে "Reja" হলো props হিসেবে User component-এ যাচ্ছে।
+
+Important Interview Questions
+
+1. What are Props?
+
+Answer:
+
+Props are used to pass data from a parent component to a child component.
+
+2. Can we modify Props?
+
+Answer:
+
+No. Props are read-only and cannot be modified by the child component.
+
+Props are immutable.
+
+3. What is the difference between Props and State?
+
+Answer:
+
+Props: Parent থেকে data আসে, read-only।
+State: Component নিজের data manage করে এবং update করতে পারে।
+মনে রাখো:
+
+Props = Data from Parent
+State = Component's own data 3. Components
+Component কী?
+
+Component হলো UI-এর একটি ছোট, reusable অংশ।
+
+যেমন:
+
+Navbar
+Button
+Card
+Footer
+
+একটি website = অনেকগুলো Component।
+
+function Welcome() {
+return <h1>Hello</h1>;
+}
+Important Interview Questions
+
+1. What is a Component in React?
+
+Answer:
+
+A component is a reusable and independent piece of UI.
+
+2. What are the types of Components?
+
+মূলত:
+
+Functional Component ✅
+Class Component (পুরোনো, এখন কম ব্যবহার হয়)
+
+আজকাল বেশি ব্যবহার হয় Functional Component + Hooks।
+
+3. What is the difference between Functional and Class Components?
+
+Answer:
+
+Functional components are simple JavaScript functions and use Hooks for state and other React features.
+
+Class components use JavaScript classes and lifecycle methods.
+
+👉 Modern React mainly uses Functional Components.
+
+4. Why do we use Components?
+
+Answer:
+
+Code reusable হয়
+Code maintain করা সহজ
+বড় UI ছোট ছোট অংশে ভাগ করা যায়
+মনে রাখো:
+
+Component = Reusable piece of UI
+
+Next: 4. Props
+
+31. React Portals
+    React Portal কী?
+
+React Portal ব্যবহার করে একটি component-এর UI তার parent DOM-এর বাইরে অন্য DOM node-এ render করা যায়।
+
+Common use:
+
+Modal
+Dialog
+Tooltip
+Important Interview Questions
+
+1. What is a React Portal?
+
+Answer:
+
+A React Portal allows us to render a component into a different DOM node outside its parent DOM hierarchy.
+
+2. When do we use React Portals?
+
+Answer:
+
+React Portals are commonly used for:
+
+Modals
+Dialogs
+Tooltips
+মনে রাখো:
+
+Portal = Render UI outside the parent DOM hierarchy
+
+next 32. Higher-Order Components (HOC)
+HOC কী?
+
+HOC হলো একটি function যা একটি component নেয় এবং enhanced/new component return করে।
+
+সহজভাবে:
+
+Component → HOC → Enhanced Component
+
+Example:
+
+const withAuth = (Component) => {
+return function EnhancedComponent(props) {
+return <Component {...props} />;
+};
+};
+Important Interview Questions
+
+1. What is a Higher-Order Component (HOC)?
+
+Answer:
+
+A Higher-Order Component is a function that takes a component and returns a new enhanced component.
+
+2. Why do we use HOC?
+
+Answer:
+
+HOCs are used to reuse component logic across multiple components.
+
+Examples:
+
+Authentication
+Authorization
+Logging
+মনে রাখো:
+
+HOC = Function that takes a Component and returns an enhanced Component
+
+next 33. Render Props
+Render Props কী?
+
+Render Props হলো একটি technique যেখানে একটি component অন্য component-কে একটি function দেয়, যাতে logic reuse করা যায়।
+
+সহজভাবে:
+
+Render Props = Share logic using a function prop
+
+Example:
+
+<DataProvider
+render={(data) => <UserList data={data} />}
+/>
+Important Interview Questions
+
+1. What is the Render Props pattern?
+
+Answer:
+
+Render Props is a pattern where a component shares logic by passing a function as a prop.
+
+2. Why do we use Render Props?
+
+Answer:
+
+It is used to reuse logic between components.
+
+মনে রাখো:
+
+Render Props = Reuse component logic through a function prop
