@@ -115,3 +115,111 @@ Good performance for dynamic applications
 সবচেয়ে গুরুত্বপূর্ণ মনে রাখার লাইন
 
 React is a JavaScript library used to build user interfaces using reusable components. It follows a declarative and component-based approach.
+
+## 2. JSX
+
+JSX কী?
+
+JSX = JavaScript XML
+
+JSX হলো এমন একটি syntax যা ব্যবহার করে আমরা JavaScript-এর ভিতরে HTML-এর মতো UI লিখতে পারি।
+
+Example:
+
+const element = <h1>Hello React</h1>;
+
+দেখতে HTML-এর মতো হলেও এটি HTML না। এটি JSX।
+
+React পরে JSX-কে JavaScript code-এ convert করে।
+
+JSX কেন ব্যবহার করি?
+
+JSX ব্যবহার করলে UI code লেখা সহজ এবং readable হয়।
+
+Without JSX:
+
+React.createElement("h1", null, "Hello");
+
+With JSX:
+
+<h1>Hello</h1>
+
+তাই JSX বেশি সহজ এবং readable।
+
+Important Interview Questions
+
+### 1. What is JSX?
+
+Answer:
+
+JSX is a syntax extension for JavaScript that allows us to write HTML-like code inside JavaScript. React converts JSX into JavaScript that creates React elements.
+
+Short answer:
+
+JSX allows us to write HTML-like UI inside JavaScript.
+
+### 2. Is JSX HTML?
+
+Answer:
+
+No. JSX looks similar to HTML, but it is not HTML. It is a JavaScript syntax extension that is converted into JavaScript code.
+
+3. Can browsers understand JSX directly?
+
+Answer:
+
+No. Browsers cannot understand JSX directly.
+
+JSX must be transformed/compiled into regular JavaScript before the browser can execute it.
+
+4. What is the difference between HTML and JSX?
+
+Important differences:
+
+HTML uses class, JSX uses className
+HTML uses for, JSX uses htmlFor
+JSX attributes generally use camelCase
+JSX expressions use {}
+
+Example:
+
+<label htmlFor="email">Email</label>
+
+<input
+  className="input"
+  onClick={handleClick}
+/> 5. How do you write JavaScript inside JSX?
+
+We use curly braces {}.
+
+const name = "Reja";
+
+function App() {
+return <h1>Hello, {name}</h1>;
+}
+
+Output:
+
+Hello, Reja
+
+You can also use expressions:
+
+<p>{10 + 20}</p>
+6. Can JSX return multiple elements?
+
+Yes, but they need to be wrapped inside a single parent element or a Fragment.
+
+function App() {
+return (
+<>
+<h1>Hello</h1>
+<p>Welcome</p>
+</>
+);
+}
+
+<> </> হলো React Fragment।
+
+সবচেয়ে গুরুত্বপূর্ণ মনে রাখো
+
+JSX is a syntax extension that allows us to write HTML-like code inside JavaScript. Browsers cannot understand JSX directly, so it is transformed into JavaScript before execution.
