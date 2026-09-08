@@ -219,3 +219,4 @@ A strong senior-level answer:
 I avoid solving every problem with higher specificity. I establish predictable style boundaries using a consistent architecture, such as component-scoped styles, CSS Modules, BEM, utility classes, or a design system. I use design tokens for colors, spacing, typography, and breakpoints, control global styles carefully, and use cascade layers where they help establish clear priority. The goal is maintainability, low specificity conflicts, predictable overrides, and reusable components.
 
 akslkdlkf
+alflsklfsk
