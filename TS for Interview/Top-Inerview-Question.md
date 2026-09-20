@@ -333,7 +333,8 @@ function print(value: string | number) {
 if (typeof value === "string") {
 console.log(value.toUpperCase());
 }
-} 32. What are type guards?
+} 
+### 32. What are type guards?
 
 Answer:
 
@@ -345,7 +346,8 @@ typeof
 instanceof
 in
 Equality checks
-Custom type guards 33. What is a custom type guard?
+Custom type guards 
+### 33. What is a custom type guard?
 
 Answer:
 
@@ -400,7 +402,8 @@ return exhaustive;
 
 If a new union member is added and not handled, TypeScript can report an error.
 
-🔵 Part 6: Generics 36. What are generics?
+🔵 Part 6: Generics 
+### 36. What are generics?
 
 Answer:
 
