@@ -16,11 +16,23 @@
 
 "JavaScript has seven primitive data types: string, number, bigint, boolean, undefined, symbol, and null. Primitive values are immutable and are not objects."
 
+### 🔄 Counter question
+
+Q: Is null a primitive?
+
+Yes, null is a primitive value, although typeof null returns "object" because of a historical JavaScript behavior.
+
 ### Q4. What is the difference between == and ===?
 
 ### 🎤 How to answer
 
 "== is loose equality. It can perform type conversion before comparing values. === is strict equality, so it compares both value and type without implicit type conversion. In most cases, I prefer === because it gives more predictable results."
+
+### 🔄 Counter question
+
+Q: Which one do you usually prefer?
+
+I usually prefer === because it avoids unexpected type coercion.
 
 ### Q5. Explain closures in JavaScript with an example.
 
@@ -46,3 +58,39 @@ console.log(increment()); // 1
 console.log(increment()); // 2
 console.log(increment()); // 3
 ```
+
+### 🔄 Counter questions
+
+Q: Why are closures useful?
+
+They are useful for data privacy, maintaining state, callbacks, event handlers, and creating function factories.
+
+Q: Does the count variable disappear after counter() finishes?
+
+Normally the outer function's execution is finished, but because the returned function still references count, JavaScript keeps that variable available through the closure.
+
+### Q7. What are arrow functions and how do they differ from regular functions?
+
+### 🎤 How to answer
+
+"Arrow functions provide a shorter syntax for writing functions. The biggest difference is that arrow functions don't have their own this; they inherit this from their surrounding lexical scope. They also don't have their own arguments object and cannot be used as constructors with new."
+
+### 💻 Example
+
+Regular function:
+
+```
+function add(a, b) {
+  return a + b;
+}
+
+Arrow function:
+
+const add = (a, b) => a + b;
+```
+
+### 🔄 Counter question
+
+Q: Does an arrow function have its own this?
+
+No. It inherits this from its surrounding scope.
