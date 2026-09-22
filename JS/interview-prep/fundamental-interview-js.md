@@ -21,3 +21,28 @@
 ### 🎤 How to answer
 
 "== is loose equality. It can perform type conversion before comparing values. === is strict equality, so it compares both value and type without implicit type conversion. In most cases, I prefer === because it gives more predictable results."
+
+### Q5. Explain closures in JavaScript with an example.
+
+### 🎤 How to answer
+
+"A closure happens when an inner function remembers and can access variables from its outer function even after the outer function has finished executing."
+
+### Example
+
+```js
+function counter() {
+  let count = 0;
+
+  return function () {
+    count++;
+    return count;
+  };
+}
+
+const increment = counter();
+
+console.log(increment()); // 1
+console.log(increment()); // 2
+console.log(increment()); // 3
+```
