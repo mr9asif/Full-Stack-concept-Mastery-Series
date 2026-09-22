@@ -2,7 +2,7 @@
 
 ### 🎤 How to answer
 
-"var, let, and const are used to declare variables in JavaScript. The main differences are in scope, redeclaration, and reassignment. var is function-scoped, while let and const are block-scoped. let can be reassigned, but const cannot be reassigned. Generally, I prefer const by default and use let when the value needs to change."
+“Var, let, and const are used to declare variables in JavaScript. let and const were introduced in ES6. The main difference is their scope and how they behave with hoisting. var is function-scoped, while let and const are block-scoped. All three are hoisted, but var is initialized with undefined, so we can access it before its declaration and get undefined. let and const are also hoisted, but they remain in the Temporal Dead Zone until their declaration is reached, so accessing them before declaration results in a ReferenceError.”
 
 ### Q2. Explain the concept of hoisting in JavaScript.
 
