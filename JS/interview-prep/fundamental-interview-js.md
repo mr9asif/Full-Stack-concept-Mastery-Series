@@ -139,6 +139,13 @@ It throws a ReferenceError.
 ### 🎤 How to answer
 
 "The Temporal Dead Zone, or TDZ, is the period between entering a block scope and the point where a let or const variable is initialized. During this period, accessing the variable causes a ReferenceError."
+"Temporal Dead Zone means we cannot access a let or const variable before its declaration is reached. If we try to access it before that point, JavaScript gives a ReferenceError."
+
+### 🔄 If interviewer asks: "Why does TDZ exist?"
+
+You can say:
+
+"It helps prevent us from accidentally using a variable before it has been properly initialized."
 
 ### 💻 Example
 
