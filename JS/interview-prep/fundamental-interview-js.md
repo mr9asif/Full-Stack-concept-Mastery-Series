@@ -602,6 +602,12 @@ Q: Where can tagged templates be useful?
 
 "They can be useful for things like custom formatting, localization, sanitization, or building specialized template-processing functions."
 
+Q: How can you identify a tagged template?
+
+You can answer:
+
+"If a function name appears immediately before the template literal, it is a tagged template. If there is no function before the backtick, it is just a normal template literal."
+
 ### Q21. What is the event loop in JavaScript?
 
 ### 🎤 How to answer
