@@ -39,3 +39,11 @@ Q58. What is code splitting in React and how does it improve performance?
 Q59. What are portals in React and when are they useful?
 Q60. Explain the lifecycle of a React functional component with hooks.
 ```
+
+## What is React?
+
+“React is a JavaScript library for building user interfaces, especially single-page applications. It was developed by Meta. React allows us to build reusable UI components and efficiently update the user interface when the application state changes.”
+
+## How does React work?
+
+“React works by using a component-based architecture. We break the UI into small reusable components. Each component can have its own state and props. When the state or props change, React creates a new Virtual DOM representation of the UI and compares it with the previous one. This process is called reconciliation. React then determines the minimum changes required and updates the actual DOM efficiently.”
