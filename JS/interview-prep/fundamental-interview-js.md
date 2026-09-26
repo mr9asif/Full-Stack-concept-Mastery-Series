@@ -1077,3 +1077,9 @@ Q: Is memoization always beneficial?
 Q: What type of functions are good candidates for memoization?
 
 "Pure functions are good candidates because the same input should consistently produce the same output."
+
+<!-- extra quesiton -->
+
+### Q. what is the different between 'undefined' and 'null' ?
+
+"undefined means a variable has been declared but no value has been assigned yet. null means the programmer intentionally sets the variable to represent no value. For example, let name; gives undefined, while let name = null means there is intentionally no value."
