@@ -230,3 +230,191 @@ Answer: Because the prop comparison itself has a performance cost. If a componen
 
 Scenario Challenge: You wrapped a Child component in React.memo, but it still re-renders every time the parent updates. The parent passes a prop onClick={() => doSomething()}. Why is memo failing?
 Solution: Inline arrow functions create a new reference in memory on every render. React.memo does a shallow comparison, sees a new function reference, and assumes props have changed. You must wrap the function in a useCallback hook in the parent to maintain referential equality.
+
+### Q46. What is the useReducer hook and when is it preferred over useState?
+
+Core Answer: useReducer is a hook used for state management that serves as an alternative to useState. It requires a reducer function (which determines how state changes based on dispatched actions) and an initial state. It is highly preferred when you have complex state logic involving multiple sub-values (like deeply nested objects) or when the next state depends heavily on the previous state.
+
+Interviewer Counter-Question: Can you build a whole application using only useReducer instead of Redux?
+Answer: Yes, combined with the Context API, useReducer can manage global state. However, it lacks the ecosystem tools of Redux, like Redux DevTools for time-travel debugging and built-in middleware (like thunks or sagas) for handling complex asynchronous actions.
+
+Scenario Challenge: You are building a complex checkout form where updating the shipping method also needs to recalculate tax, update the total price, and clear the discount code. Managing this with useState requires calling 4 different setter functions.
+Solution: Move this logic into a useReducer. You dispatch a single action dispatch({ type: 'UPDATE_SHIPPING', payload: 'express' }), and the reducer centrally handles updating all four state values in one predictable place.
+
+### Q47. Explain the useMemo hook and give a use case.
+
+Core Answer: useMemo is a performance optimization hook that memoizes (caches) the result of a calculation. It takes a calculation function and a dependency array. React will only recalculate the value when one of the dependencies has changed. If no dependencies changed, it returns the cached result from the previous render.
+
+Interviewer Counter-Question: If caching is good, why shouldn't we wrap every variable declaration in useMemo?
+Answer: Because the useMemo hook itself has a performance cost. React has to allocate memory for the cached value and run a comparison check on the dependency array on every render. For simple arithmetic or string manipulation, running the calculation is actually faster than using useMemo.
+
+Scenario Challenge: Your component fetches a list of 5,000 users and allows the user to toggle a "Dark Mode" button. Every time they click dark mode, the app freezes for a second. Why?
+Solution: The state change for dark mode is causing the component to re-render, which is likely re-running a heavy filtering or sorting operation on the 5,000 users. Wrap the sorting logic in useMemo with the user data as the dependency to prevent it from recalculating on theme toggles.
+
+### Q48. What is the useCallback hook and when do you use it?
+
+Core Answer: While useMemo caches a calculated value, useCallback caches a function definition. In functional components, any function defined inside the component is recreated as a brand new object in memory on every single render. useCallback ensures the function maintains the same referential identity across renders as long as its dependencies stay the same.
+
+Interviewer Counter-Question: What is the primary relationship between useCallback and React.memo?
+Answer: React.memo prevents a child component from re-rendering if its props haven't changed. However, if a parent passes an inline function (e.g., onClick={() => doSomething()}) to that memoized child, the child will still re-render because the function is a new reference every time. You must use useCallback in the parent to pass the same function reference.
+
+Scenario Challenge: You wrap a function in useCallback with an empty dependency array []. Inside the function, it logs a state variable, but it always logs 0, even though the UI shows the state is 5.
+Solution: You created a stale closure. Because the dependency array is empty, the function was memoized on the first render when the state was 0. You must add the state variable to the dependency array.
+
+### Q49. What is React Router and how do you set up client-side routing?
+
+Core Answer: React Router is the standard library for client-side routing in React applications. Instead of making a request to the server for a new HTML page when navigating, React Router intercepts the URL change and dynamically swaps out the rendered React components in the DOM, creating a seamless Single Page Application (SPA) experience.
+
+Interviewer Counter-Question: How does React Router manipulate the browser URL without triggering a page reload?
+Answer: It uses the HTML5 History API (specifically pushState and replaceState) under the hood to update the URL in the browser's address bar and add entries to the browser's history stack without triggering a full page refresh.
+
+Scenario Challenge: Users are visiting [www.yourapp.com/dashboard/settings](https://www.yourapp.com/dashboard/settings), but when they refresh the page, they get a 404 error from the server.
+Solution: The server doesn't know about client-side routes. You must configure your server (or static host) to redirect all unknown requests (a "catch-all") back to index.html, where React Router will take over and render the correct component based on the URL path.
+
+### Q50. What is the difference between useNavigate and Link in React Router?
+
+Core Answer:
+
+<Link to="..."> is a declarative component used in JSX. It renders an accessible <a> tag in the DOM and is meant for explicit user navigation (like clicking items in a navigation bar).
+
+useNavigate is an imperative hook. It returns a function that lets you navigate programmatically via JavaScript code (e.g., redirecting after a form submission or a successful API call).
+
+Interviewer Counter-Question: Can you just use a standard <a href="..."> instead of <Link>?
+Answer: You can, but you shouldn't for internal links. A standard <a> tag bypasses React Router and causes the browser to perform a full page reload, wiping out all of your React application state (like Redux stores or Context values).
+
+Scenario Challenge: You want a user to be redirected to the login page when their session expires, but you want to ensure they can't click the browser's "Back" button to return to the protected route.
+Solution: Use navigate('/login', { replace: true }). The replace flag overwrites the current entry in the history stack rather than adding a new one.
+
+### Q51. What are custom hooks in React? Write a simple example.
+
+Core Answer: Custom hooks are regular JavaScript functions that start with the word use and can call other built-in React hooks. They are the primary mechanism for extracting and reusing stateful logic across different components without copying and pasting code.
+
+JavaScript
+
+```
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return width;
+}
+```
+
+Interviewer Counter-Question: If two different components call the useWindowWidth hook, do they share the exact same state instance?
+Answer: No. Custom hooks share stateful logic, not state itself. Each component calling the hook gets a completely independent, isolated instance of the state.
+
+Scenario Challenge: You wrote a utility function fetchUserData() to handle API calls. You want to add useState inside it to handle loading states. React throws an error. Why?
+Solution: You can only call Hooks inside React components or custom Hooks. You must rename fetchUserData to useFetchUserData to satisfy the Rules of Hooks.
+
+### Q52. What is lazy loading in React and how is it implemented?
+
+Core Answer: Lazy loading is a technique to defer the loading of non-critical components until they are actually needed (e.g., when a user navigates to a specific route). It is implemented using React.lazy() for dynamic imports and wrapped in a <Suspense> boundary to show a fallback UI (like a spinner) while the component downloads.
+
+Interviewer Counter-Question: Why is lazy loading important for Single Page Applications (SPAs)?
+Answer: By default, standard bundlers like Webpack package the entire application into a single massive JavaScript file. Lazy loading splits this bundle up (code splitting), drastically reducing the initial download size and improving the Time to Interactive (TTI) on the first load.
+
+Scenario Challenge: You lazy-loaded a massive charting component. A user with a terrible internet connection tries to view it, but they just stare at a blank white screen for 10 seconds before it appears.
+Solution: You forgot the Suspense boundary. You must wrap the lazy-loaded component: <Suspense fallback="{<Spinner"/>}><HeavyChart/></Suspense>.
+
+### Q53. What are React error boundaries and why are they useful?
+
+Core Answer: Error Boundaries are a safety net for React applications. If JavaScript throws an error during rendering, lifecycle methods, or in constructors, it normally crashes the entire React component tree, resulting in a blank white screen. Error boundaries catch these errors, log them, and render a graceful fallback UI instead of crashing the whole app.
+
+Interviewer Counter-Question: Can you write an error boundary using functional components and hooks?
+Answer: No, there is currently no hook equivalent for getDerivedStateFromError or componentDidCatch. Error boundaries must be written as Class components (or implemented using a third-party library like react-error-boundary).
+
+Scenario Challenge: A user clicks a "Submit" button, and the API request throws a 500 error inside an onClick handler. You have an Error Boundary at the top of the app, but the app doesn't show the fallback UI. Why?
+Solution: Error boundaries do not catch errors in event handlers, asynchronous code (like setTimeout), or server-side rendering. You must handle those manually using standard try/catch blocks.
+
+### Q54. What is the Context API and when should you use Redux instead?
+
+Core Answer: The Context API is a built-in React feature designed specifically to solve prop-drilling by providing a way to pass data deeply through the component tree without passing props manually.
+You should reach for Redux (or modern alternatives like Zustand/Redux Toolkit) instead of Context when:
+
+You have high-frequency state updates (Context triggers re-renders on all consumers).
+
+You need complex, asynchronous state transformations (middleware/thunks).
+
+You require deep debugging capabilities (Redux DevTools for time-travel).
+
+Interviewer Counter-Question: If Context causes all consumers to re-render, how can you mitigate performance issues?
+Answer: You can split your state into multiple smaller Contexts logically (e.g., ThemeContext and AuthContext separate) or memoize the provider's value using useMemo so it doesn't trigger re-renders unless the underlying data actually changes.
+
+Scenario Challenge: You are building a live dashboard showing real-time stock prices updating every 100 milliseconds. Should you put this data in the Context API?
+Solution: Absolutely not. The rapid updates will force every component consuming the Context to re-render 10 times a second, grinding the app to a halt. This requires a dedicated state manager or localized state.
+
+### Q55. Explain the concept of reconciliation in React.
+
+Core Answer: Reconciliation is the internal algorithm React uses to diff (compare) the previous Virtual DOM tree with the newly generated Virtual DOM tree after a state or prop update. It figures out exactly what changed and calculates the most efficient way to patch those exact changes into the real browser DOM. React 16 introduced the "Fiber" architecture to make this process interruptible and prioritized.
+
+Interviewer Counter-Question: Comparing two trees is traditionally an O(n³) operation. How does React do it so fast (O(n))?
+Answer: React relies on two heuristics:
+
+Two elements of different types will produce completely different trees (React won't bother diffing their contents; it just unmounts the old and mounts the new).
+
+The developer will provide a unique key prop to hint which child elements are stable across renders.
+
+Scenario Challenge: You have a <div> containing a complex, heavy component. You decide to change the wrapper from <div> to a <section>. What does React do during reconciliation?
+Solution: Because the root element type changed from div to section, React assumes the entire subtree is invalid. It will unmount the heavy component entirely and mount it from scratch, destroying its local state in the process.
+
+### Q56. What is the difference between React.Fragment and empty tags (<>)?
+
+Core Answer: Both are used to group multiple sibling elements together without adding an extra, meaningless wrapper node (like an unnecessary <div>) to the actual DOM. <> is simply syntactic sugar for <React.Fragment>.
+
+Interviewer Counter-Question: If they are the same, when are you strictly required to use <React.Fragment>?
+Answer: You must use the full <React.Fragment> syntax when mapping over an array to return grouped elements because you need to pass a key prop. The shorthand <> syntax does not accept any attributes, including keys.
+
+Scenario Challenge: You are rendering a description list <dl> and need to dynamically generate <dt> and <dd> pairs from an array. Wrapping the pair in a <div> breaks the HTML validation.
+Solution: Use <React.Fragment key="{item.id}"> to group the <dt> and <dd> together cleanly.
+
+### Q57. How do you handle forms in React? Explain with Formik or react-hook-form.
+
+Core Answer: While you can handle forms natively in React using controlled components (useState for every input), it requires massive boilerplate for validation, error handling, and touched states.
+Libraries solve this. react-hook-form is the modern standard because it leverages uncontrolled components via refs. It registers inputs without deeply linking them to component state, meaning typing in a field doesn't trigger a re-render of the entire form, resulting in much better performance.
+
+Interviewer Counter-Question: What is the primary difference in philosophy between Formik and react-hook-form?
+Answer: Formik relies heavily on controlled state and React Context, causing the entire form to re-render on every single keystroke. react-hook-form isolates renders using refs, re-rendering only when absolutely necessary (like showing an error message).
+
+Scenario Challenge: You have a large registration form. Typing rapidly into the "First Name" field feels incredibly sluggish and delayed.
+Solution: The form is likely fully controlled and doing complex validation or triggering deep re-renders on every keystroke. You can fix this by debouncing the validation, or migrating to react-hook-form.
+
+### Q58. What is code splitting in React and how does it improve performance?
+
+Core Answer: Code splitting is the practice of breaking down a large JavaScript bundle into smaller, logical chunks. Instead of downloading the entire application on the first visit, the browser only downloads the chunk needed for the initial route. This dramatically reduces the initial payload, improving the First Contentful Paint (FCP) and Time to Interactive (TTI) metrics.
+
+Interviewer Counter-Question: Besides Route-based code splitting, what is another common boundary to split code?
+Answer: Component-based code splitting. You can code-split heavy, user-triggered UI elements that aren't visible immediately—like large Modals, complex rich-text editors, or third-party charting libraries.
+
+Scenario Challenge: You implement React Router and lazy-load all 20 of your routes. However, users complain that every time they click a nav link, they stare at a spinner for 2 seconds.
+Solution: You split the code too aggressively without prefetching. You can implement on-hover prefetching (loading the module when the user hovers over the link) so the chunk is already downloaded by the time they click.
+
+### Q59. What are portals in React and when are they useful?
+
+Core Answer: Portals (ReactDOM.createPortal) provide a first-class way to render children into a DOM node that exists entirely outside the DOM hierarchy of the parent component. They are primarily used for UI elements that must break out of their container to avoid CSS constraints like z-index conflicts or overflow: hidden, such as Modals, Tooltips, and Dropdowns.
+
+Interviewer Counter-Question: If a Modal is rendered in a Portal attached to the document.body, how does event bubbling work? Does an onClick event bubble up to the document.body or up the React tree?
+Answer: It bubbles up the React tree. Even though the element is physically somewhere else in the DOM, React portals maintain their position in the React component hierarchy. An event fired inside the portal will bubble up to the React parent that invoked it.
+
+Scenario Challenge: You build a Modal component inside a deeply nested sidebar, but it gets cut off because the sidebar has overflow: hidden applied to it.
+Solution: Use createPortal to render the Modal's JSX directly into a <div id="modal-root"> located at the very end of your index.html <body>, escaping the sidebar's CSS constraints entirely.
+
+### Q60. Explain the lifecycle of a React functional component with hooks.
+
+Core Answer: Unlike Class components, Functional components don't have explicit lifecycle methods (like componentDidMount or componentWillUnmount). Instead, they execute top-to-bottom on every render. We tap into the component's lifecycle using the useEffect hook:
+
+Mounting: useEffect(..., []) runs once after the initial render.
+
+Updating: useEffect(..., [deps]) runs after the initial render and whenever a dependency changes.
+
+Unmounting: The return () => {} function inside a useEffect runs right before the component unmounts (and before the next effect runs on updates) to clean up subscriptions or timers.
+
+Interviewer Counter-Question: Why does React strict mode in development run useEffect twice on mount?
+Answer: React 18 introduced this intentionally to help developers catch bugs. By immediately mounting, unmounting (running the cleanup), and remounting, it forces you to ensure your useEffect cleanup functions are implemented correctly and don't cause memory leaks.
+
+Scenario Challenge: You need to measure the width of a DOM element to position a tooltip accurately before the browser paints it to the screen, otherwise the tooltip flickers. useEffect is causing a flicker.
+Solution: useEffect runs asynchronously after the browser paints. For synchronous DOM measurements, you must use useLayoutEffect, which runs synchronously immediately after React performs all DOM mutations but before the browser paints.
