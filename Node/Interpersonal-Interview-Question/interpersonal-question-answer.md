@@ -9,7 +9,7 @@ Right now, I’m looking for an opportunity where I can contribute as a junior s
 ### 2. Why did you choose software engineering?
 
 Answer:
-I chose software engineering because I enjoy solving problems more than simply writing code. When I face a problem, I naturally try to understand how it works, break it into smaller pieces, and find a reliable solution.
+I chose software engineering because I enjoy solving roblems more than simply writing code. When I face a problem, I naturally try to understand how it works, break it into smaller pieces, and find a reliable solution.
 During my diploma, subjects like DSA, DBMS, Operating Systems, and Networking made me interested in understanding what happens behind the application. Later, when I started building full-stack projects, I realized I really enjoyed turning those concepts into working systems.
 That combination of problem-solving and building real products is what attracted me to software engineering.
 
